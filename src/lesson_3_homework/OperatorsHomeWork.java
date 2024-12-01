@@ -7,7 +7,9 @@ public class OperatorsHomeWork {
         //getCalculatedFormul();
         //getSubtractionNaberFormul();
         //getSubtractionNabersFormul();
-        getRounding();
+        //getRounding();
+        //getDilation();
+        getExchange();
 
 
     }
@@ -80,25 +82,25 @@ private static int getIntInputB(Scanner scanner) {
         return value;
     }
     private static int getSubtractionValid(Scanner scanner, String prompt) {
-            int value = 0;
-            boolean valid = false;
-            while (!valid) {
-                System.out.print(prompt);
-                if (scanner.hasNextInt()) {
-                    value = scanner.nextInt();
-                    // Проверка на двузначное число
-                    if (value >= 10 && value <= 99) {
-                        valid = true; // Ввод корректен, выходим из цикла
-                    } else {
-                        System.out.println("ERROR: Enter a two-digit integer (between 10 and 99).");
-                    }
+        int value = 0;
+        boolean valid = false;
+        while (!valid) {
+            System.out.print(prompt);
+            if (scanner.hasNextInt()) {
+                value = scanner.nextInt();
+                // Проверка на двузначное число
+                if (value >= 10 && value <= 99) {
+                    valid = true; // Ввод корректен, выходим из цикла
                 } else {
-                    System.out.println("ERROR: Enter an integer.");
-                    scanner.next(); // Сбрасываем некорректный ввод
+                    System.out.println("ERROR: Enter a two-digit integer (between 10 and 99).");
                 }
+            } else {
+                System.out.println("ERROR: Enter an integer.");
+                scanner.next(); // Сбрасываем некорректный ввод
             }
-            return value;
         }
+        return value;
+    }
     private static int getSubtractionNabersValid(Scanner scanner, String prompt) {
         int value = 0;
         boolean valid = false;
@@ -136,7 +138,7 @@ private static int getIntInputB(Scanner scanner) {
     }
 
     //Valid
-     //Task 2
+    //Task 2
     public static void getSubtractionNaberFormul() {
         Scanner scanner = new Scanner(System.in);
         int nValud = getSubtractionValid(scanner, "You will enter the value of n: ");
@@ -152,7 +154,7 @@ private static int getIntInputB(Scanner scanner) {
                 }
             }
         }
-}
+    }
     //Task 3
     public static void getSubtractionNabersFormul() {
         Scanner scanner = new Scanner(System.in);
@@ -176,8 +178,29 @@ private static int getIntInputB(Scanner scanner) {
     //Task 4
     public static void getRounding(){
         Scanner scanner = new Scanner(System.in);
-        double nValud = getRoundingValid(scanner, "You will enter the value of n: ");
-        System.out.print(nValud);
+        double nValud = getRoundingValid(scanner, "Enter the number to be rounded: ");
+        int rounding = (int) Math.round(nValud);
+        System.out.print(rounding);
 
+    }
+    //Task 5
+    public  static  void getDilation(){
+        Scanner scanner = new Scanner(System.in);
+        int aValue = getValid(scanner, "Enter an integer a: ");
+        int bValue = getValid(scanner, "Enter an integer b: ");
+        int dilation = aValue / bValue;
+        int residue = aValue % bValue;
+
+        System.out.print("Result : " + dilation + " и остаток = " + residue);
+    }
+    // Hard Task
+    public static void getExchange(){
+        int aValue = 1;
+        int bValue = 2;
+        System.out.println("Before" + " a= " + aValue + " b= " + bValue);
+        aValue = aValue + bValue;
+        bValue = aValue - bValue;
+        aValue = aValue - bValue;
+        System.out.println("Aаfter" + " a= " + aValue + " b= " + bValue);
     }
 }
