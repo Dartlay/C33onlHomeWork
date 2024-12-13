@@ -4,110 +4,68 @@ import java.util.Random;
 
 public class TicTacToeBot {
     private char[][] gameTable;
-    private char botSymbol;
-    private char playerSymbol;
 
     public TicTacToeBot(char[][] gameTable) {
         this.gameTable = gameTable;
-        this.botSymbol = 'O';
-        this.playerSymbol = 'X';
     }
 
     public void makeMove() {
+        int[] move = findBestMove();
+        if (move != null) {
+            gameTable[move[0]][move[1]] = 'O';
+        }
+    }
 
-        if (gameTable[1][1] == '*') {
-            gameTable[1][1] = botSymbol;
-            return;
+    private int[] findBestMove() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (gameTable[i][j] == '*') {
+                    gameTable[i][j] = 'O';
+                    if (checkWin('O')) {
+                        return new int[]{i, j};
+                    }
+                    gameTable[i][j] = '*';
+                }
+            }
         }
 
 
-        if (gameTable[0][0] == '*') {
-            gameTable[0][0] = botSymbol;
-            return;
-        }
-        if (gameTable[0][2] == '*') {
-            gameTable[0][2] = botSymbol;
-            return;
-        }
-        if (gameTable[2][0] == '*') {
-            gameTable[2][0] = botSymbol;
-            return;
-        }
-        if (gameTable[2][2] == '*') {
-            gameTable[2][2] = botSymbol;
-            return;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (gameTable[i][j] == '*') {
+                    gameTable[i][j] = 'X';
+                    if (checkWin('X')) {
+                        gameTable[i][j] = 'O';
+                        return new int[]{i, j};
+                    }
+                    gameTable[i][j] = '*';
+                }
+            }
         }
 
 
         Random random = new Random();
-        int row, col;
-        do {
-            row = random.nextInt(3);
-            col = random.nextInt(3);
-        } while (gameTable[row][col] != '*');
-
-        gameTable[row][col] = botSymbol;
+        while (true) {
+            int row = random.nextInt(3);
+            int col = random.nextInt(3);
+            if (gameTable[row][col] == '*') {
+                return new int[]{row, col};
+            }
+        }
     }
 
-    private boolean tryToWin(char symbol) {
-
+    private boolean checkWin(char symbol) {
         for (int i = 0; i < 3; i++) {
-            if (gameTable[i][0] == symbol && gameTable[i][1] == symbol && gameTable[i][2] == '*') {
-                gameTable[i][2] = symbol;
-                return true;
-            }
-            if (gameTable[i][0] == symbol && gameTable[i][2] == symbol && gameTable[i][1] == '*') {
-                gameTable[i][1] = symbol;
-                return true;
-            }
-            if (gameTable[i][1] == symbol && gameTable[i][2] == symbol && gameTable[i][0] == '*') {
-                gameTable[i][0] = symbol;
+            if (gameTable[i][0] == symbol && gameTable[i][1] == symbol && gameTable[i][2] == symbol) {
                 return true;
             }
         }
-
-
         for (int i = 0; i < 3; i++) {
-            if (gameTable[0][i] == symbol && gameTable[1][i] == symbol && gameTable[2][i] == '*') {
-                gameTable[2][i] = symbol;
-                return true;
-            }
-            if (gameTable[0][i] == symbol && gameTable[2][i] == symbol && gameTable[1][i] == '*') {
-                gameTable[1][i] = symbol;
-                return true;
-            }
-            if (gameTable[1][i] == symbol && gameTable[2][i] == symbol && gameTable[0][i] == '*') {
-                gameTable[0][i] = symbol;
+            if (gameTable[0][i] == symbol && gameTable[1][i] == symbol && gameTable[2][i] == symbol) {
                 return true;
             }
         }
-
-
-        if (gameTable[0][0] == symbol && gameTable[1][1] == symbol && gameTable[2][2] == '*') {
-            gameTable[2][2] = symbol;
-            return true;
-        }
-        if (gameTable[0][0] == symbol && gameTable[2][2] == symbol && gameTable[1][1] == '*') {
-            gameTable[1][1] = symbol;
-            return true;
-        }
-        if (gameTable[1][1] == symbol && gameTable[2][2] == symbol && gameTable[0][0] == '*') {
-            gameTable[0][0] = symbol;
-            return true;
-        }
-        if (gameTable[0][2] == symbol && gameTable[1][1] == symbol && gameTable[2][0] == '*') {
-            gameTable[2][0] = symbol;
-            return true;
-        }
-        if (gameTable[0][2] == symbol && gameTable[2][0] == symbol && gameTable[1][1] == '*') {
-            gameTable[1][1] = symbol;
-            return true;
-        }
-        if (gameTable[1][1] == symbol && gameTable[2][0] == symbol && gameTable[0][2] == '*') {
-            gameTable[0][2] = symbol;
-            return true;
-        }
-
-        return false;
+        return (gameTable[0][0] == symbol && gameTable[1][1] == symbol && gameTable[2][2] == symbol) ||
+                (gameTable[0][2] == symbol && gameTable[1][1] == symbol && gameTable[2][0] == symbol);
     }
 }

@@ -116,16 +116,34 @@ public class TicTacToeGame {
 
                 if (checkWin('X')) {
                     System.out.println(ANSI_GREEN + "Congratulations! You won!" + ANSI_STANDART);
-                    playOrNot();
+                    if (askToPlayAgain()) {
+                        StartGame(); // Запускаем новую игру
+                    } else {
+                        break;
+                    }
                 }
 
-                System.out.println( ANSI_GREEN + "A bot walks" + ANSI_STANDART);
+                System.out.println(ANSI_GREEN + "A bot walks" + ANSI_STANDART);
                 bot.makeMove();
                 drawTable();
 
                 if (checkWin('O')) {
                     System.out.println(ANSI_GREEN + "The bot won!" + ANSI_STANDART);
-                    playOrNot();
+                    if (askToPlayAgain()) {
+                        StartGame(); // Запускаем новую игру
+                    } else {
+                        break;
+                    }
+                }
+
+                // Проверка на ничью
+                if (isBoardFull()) {
+                    System.out.println(ANSI_GREEN + "It's a draw!" + ANSI_STANDART);
+                    if (askToPlayAgain()) {
+                        StartGame(); // Запускаем новую игру
+                    } else {
+                        break;
+                    }
                 }
 
             } else {
@@ -133,22 +151,26 @@ public class TicTacToeGame {
             }
         }
     }
-    //Win check
-    private boolean checkWin(char symbol) {
 
+    private boolean askToPlayAgain() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(ANSI_GREEN + "Do you want to play again? (Y/N): " + ANSI_STANDART);
+        String response = scanner.nextLine();
+        return response.equalsIgnoreCase("Y");
+    }
+
+    private boolean checkWin(char symbol) {
         for (int i = 0; i < 3; i++) {
             if (gameTable[i][0] == symbol && gameTable[i][1] == symbol && gameTable[i][2] == symbol) {
                 return true;
             }
         }
 
-
         for (int i = 0; i < 3; i++) {
             if (gameTable[0][i] == symbol && gameTable[1][i] == symbol && gameTable[2][i] == symbol) {
                 return true;
             }
         }
-
 
         if (gameTable[0][0] == symbol && gameTable[1][1] == symbol && gameTable[2][2] == symbol) {
             return true;
@@ -158,6 +180,13 @@ public class TicTacToeGame {
         }
 
         return false;
-
+    }
+    private boolean isBoardFull() {
+        for (char[] row : gameTable) {
+            for (char cell : row) {
+                if (cell == '*') return false; // Если есть пустая клетка, значит, не ничья
+            }
+        }
+        return true; // Все клетки заполнены
     }
 }
