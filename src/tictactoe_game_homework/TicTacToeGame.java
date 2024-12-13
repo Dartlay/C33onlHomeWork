@@ -117,7 +117,7 @@ public class TicTacToeGame {
                 if (checkWin('X')) {
                     System.out.println(ANSI_GREEN + "Congratulations! You won!" + ANSI_STANDART);
                     if (askToPlayAgain()) {
-                        StartGame(); // Запускаем новую игру
+                        StartGame();
                     } else {
                         break;
                     }
@@ -130,17 +130,17 @@ public class TicTacToeGame {
                 if (checkWin('O')) {
                     System.out.println(ANSI_GREEN + "The bot won!" + ANSI_STANDART);
                     if (askToPlayAgain()) {
-                        StartGame(); // Запускаем новую игру
+                        StartGame();
                     } else {
                         break;
                     }
                 }
 
-                // Проверка на ничью
+
                 if (isBoardFull()) {
                     System.out.println(ANSI_GREEN + "It's a draw!" + ANSI_STANDART);
                     if (askToPlayAgain()) {
-                        StartGame(); // Запускаем новую игру
+                        StartGame();
                     } else {
                         break;
                     }
@@ -184,9 +184,9 @@ public class TicTacToeGame {
     private boolean isBoardFull() {
         for (char[] row : gameTable) {
             for (char cell : row) {
-                if (cell == '*') return false; // Если есть пустая клетка, значит, не ничья
+                if (cell == '*') return false;
             }
         }
-        return true; // Все клетки заполнены
+        return true;
     }
 }
