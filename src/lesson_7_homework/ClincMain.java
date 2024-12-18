@@ -5,8 +5,6 @@ import lesson_7_homework.Clinic.Patient;
 
 public class ClincMain {
     public static void main(String[] args) {
-        System.out.println("");
-        System.out.println("");
         Patient[] patients = {
                 new Patient("Alice", "Johnson", 28,
                         "Flu", "Medication and rest"),
@@ -23,7 +21,6 @@ public class ClincMain {
                 new Patient("Grace", "Taylor", 30, "Toothache",
                         "Pain relief and dental checkup")
         };
-
         Doctor[] doctors = {
                 new Dentist("John", "Doe", 30,
                         "Specializes in orthodontics"),
@@ -44,7 +41,6 @@ public class ClincMain {
             patient.displayCard();
         }
     }
-
     public static void assignDoctor(Patient patient, Doctor... doctors) {
         for (Doctor doctor : doctors) {
             if (patient.getDiagnosis().toLowerCase().contains("flu") && doctor instanceof Therapist) {
