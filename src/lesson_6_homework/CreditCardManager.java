@@ -67,7 +67,7 @@ public class CreditCardManager {
                     break;
                 case 4:
                     for (CreditCard card : cards) {
-                        System.out.println(card); // Вывод информации о каждой карте
+                        System.out.println(card);
                     }
                     break;
                 default:

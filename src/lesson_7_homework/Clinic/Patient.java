@@ -37,7 +37,8 @@ public class Patient {
         this.personalDoctor = doctor;
     }
     public void displayCard() {
-        System.out.println( ANSI_GREEN + "--------------"+ANSI_YELLOW +"Patient Card"+ANSI_GREEN+"-------------------" + ANSI_STANDARD);
+        System.out.println( ANSI_GREEN + "--------------"+ANSI_YELLOW +"Patient Card"+ANSI_GREEN
+                +"-------------------" + ANSI_STANDARD);
         System.out.println( ANSI_GREEN + "\tFirst Name: " + ANSI_YELLOW +firstName );
         System.out.println( ANSI_GREEN+ "\tLast Name: " + ANSI_YELLOW +lastName );
         System.out.println(ANSI_GREEN + "\tAge: " + ANSI_YELLOW + age);
