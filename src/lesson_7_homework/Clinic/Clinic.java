@@ -1,11 +1,13 @@
-package lesson_7_homework;
+package lesson_7_homework.Clinic;
+import lesson_7_homework.Clinic.Doctors.Dentist;
 import lesson_7_homework.Clinic.Doctors.*;
-import lesson_7_homework.Clinic.Patient;
 
 
-public class ClincMain {
-    public static void main(String[] args) {
-        Patient[] patients = {
+public class Clinic {
+    private Patient[] patients;
+    private Doctor[] doctors;
+    public Clinic() {
+        this.patients = new Patient[]{
                 new Patient("Alice", "Johnson", 28,
                         "Flu", "Medication and rest"),
                 new Patient("Bob", "Smith", 34,
@@ -18,10 +20,10 @@ public class ClincMain {
                         "High blood pressure", "Lifestyle changes and medication"),
                 new Patient("Frank", "Wilson", 51,
                         "Arthritis", "Physical therapy and anti-inflammatory medication"),
-                new Patient("Grace", "Taylor", 30, "Toothache",
-                        "Pain relief and dental checkup")
+                new Patient("Grace", "Taylor", 30,
+                        "Toothache", "Pain relief and dental checkup")
         };
-        Doctor[] doctors = {
+        this.doctors = new Doctor[]{
                 new Dentist("John", "Doe", 30,
                         "Specializes in orthodontics"),
                 new Surgeon("Jane", "Smith", 45,
@@ -35,12 +37,15 @@ public class ClincMain {
                 new Therapist("David", "Wilson", 38,
                         "Focuses on family therapy")
         };
+    }
 
+    public void assignDoctorsToPatients() {
         for (Patient patient : patients) {
             assignDoctor(patient, doctors);
             patient.displayCard();
         }
     }
+
     public static void assignDoctor(Patient patient, Doctor... doctors) {
         for (Doctor doctor : doctors) {
             if (patient.getDiagnosis().toLowerCase().contains("flu") && doctor instanceof Therapist) {
@@ -59,7 +64,8 @@ public class ClincMain {
                 patient.setPersonalDoctor(doctor);
                 doctor.treatPatient(patient);
                 return;
-            } else if (patient.getDiagnosis().toLowerCase().contains("high blood pressure") && doctor instanceof Therapist) {
+            } else if (patient.getDiagnosis().toLowerCase().contains("high blood pressure")
+                    && doctor instanceof Therapist) {
                 patient.setPersonalDoctor(doctor);
                 doctor.treatPatient(patient);
                 return;
@@ -73,7 +79,6 @@ public class ClincMain {
                 return;
             }
         }
-        System.out.println( "No suitable doctor found for " + patient.getFirstName() + " "
-                + patient.getLastName() + "." );
+        System.out.println("No suitable doctor found for " + patient.getFirstName() + " " + patient.getLastName() + "." );
     }
 }
