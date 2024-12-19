@@ -156,7 +156,15 @@ public class TicTacToeGame {
         Scanner scanner = new Scanner(System.in);
         System.out.print(ANSI_GREEN + "Do you want to play again? (Y/N): " + ANSI_STANDART);
         String response = scanner.nextLine();
-        return response.equalsIgnoreCase("Y");
+        if (response.equalsIgnoreCase("Y")) {
+            return true;
+        } else if (response.equalsIgnoreCase("N")) {
+            System.out.println(ANSI_GREEN + "Thank you for playing!" + ANSI_YELLOW +" Bye-Bye" + ANSI_STANDART);
+            return false;
+        } else {
+            System.out.println("Invalid input. Please enter Y or N.");
+            return askToPlayAgain();
+        }
     }
 
     private boolean checkWin(char symbol) {
