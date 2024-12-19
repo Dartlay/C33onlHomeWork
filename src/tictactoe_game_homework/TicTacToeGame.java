@@ -93,6 +93,7 @@ public class TicTacToeGame {
     public void playGame() {
         Scanner scanner = new Scanner(System.in);
         TicTacToeBot bot = new TicTacToeBot(gameTable);
+
         if (firstPlayer == 'O') {
             bot.makeMove();
             drawTable();
@@ -109,13 +110,19 @@ public class TicTacToeGame {
                 System.out.println(ANSI_RED + "Invalid entry! Please enter values from 1 to 3" + ANSI_STANDART);
                 continue;
             }
-
             if (gameTable[row][col] == '*') {
                 gameTable[row][col] = 'X';
                 drawTable();
-
                 if (checkWin('X')) {
                     System.out.println(ANSI_GREEN + "Congratulations! You won!" + ANSI_STANDART);
+                    if (askToPlayAgain()) {
+                        StartGame();
+                    } else {
+                        break;
+                    }
+                }
+                if (isBoardFull()) {
+                    System.out.println(ANSI_GREEN + "It's a draw!" + ANSI_STANDART);
                     if (askToPlayAgain()) {
                         StartGame();
                     } else {
@@ -135,8 +142,6 @@ public class TicTacToeGame {
                         break;
                     }
                 }
-
-
                 if (isBoardFull()) {
                     System.out.println(ANSI_GREEN + "It's a draw!" + ANSI_STANDART);
                     if (askToPlayAgain()) {
@@ -190,9 +195,11 @@ public class TicTacToeGame {
         return false;
     }
     private boolean isBoardFull() {
-        for (char[] row : gameTable) {
-            for (char cell : row) {
-                if (cell == '*') return false;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (gameTable[i][j] == '*') {
+                    return false;
+                }
             }
         }
         return true;
