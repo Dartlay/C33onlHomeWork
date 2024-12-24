@@ -2,7 +2,7 @@ package lesson_8_homework;
 
 public class AnimalMain {
     public static void main(String[] args) {
-        Animal tiger = new Tiger();
+        Animal tiger = new Tigger();
         Animal rabbit = new Rabbit();
        Animal dog = new Dog();
 

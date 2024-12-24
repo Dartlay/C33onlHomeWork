@@ -1,6 +1,6 @@
 package lesson_8_homework;
 
-class Tiger extends Animal {
+class Tigger extends Animal {
     @Override
     public void voice() {
         System.out.println("The tiger Roars!");
