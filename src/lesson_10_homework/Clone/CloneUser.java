@@ -23,7 +23,7 @@ public class CloneUser implements Cloneable{
         this.storage = storage;
     }
 
-    // Геттеры
+
     public String getProcessor() {
         return processor;
     }
