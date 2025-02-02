@@ -2,8 +2,6 @@ package lesson_12_homework.Auth;
 import lesson_12_homework.Exception.WrongLoginException;
 import java.util.Arrays;
 import java.util.List;
-
-
 public class Login {
     private String login;
     private static final List<String> VALID_DOMAINS = Arrays.asList(
